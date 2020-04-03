@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>附录 · GitBook</title>
+        <title>6.错误状态CmdError · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="README.md" />
+    <link rel="next" href="../ACK NACK/ACK NACK.html" />
     
     
-    <link rel="prev" href="../Graphic/Graphic.html" />
+    <link rel="prev" href="../Data/Data.html" />
     
 
     </head>
@@ -348,9 +348,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.7" data-path="../Error/Error.html">
+        <li class="chapter active" data-level="2.7" data-path="Error.html">
             
-                <a href="../Error/Error.html">
+                <a href="Error.html">
             
                     
                     6.错误状态CmdError
@@ -1176,9 +1176,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="2.13" data-path="Appendix.html">
+        <li class="chapter " data-level="2.13" data-path="../Appendix/Appendix.html">
             
-                <a href="Appendix.html">
+                <a href="../Appendix/Appendix.html">
             
                     
                     附录
@@ -1190,7 +1190,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="2.13.1" data-path="README.md">
+        <li class="chapter " data-level="2.13.1" data-path="../Appendix/README.md">
             
                 <span>
             
@@ -1238,7 +1238,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >附录</a>
+        <a href=".." >6.错误状态CmdError</a>
     </h1>
 </div>
 
@@ -1253,56 +1253,103 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x9644;&#x5F55;">&#x9644;&#x5F55;</h1>
-<h3 id="crc&#x6821;&#x9A8C;&#x7B97;&#x6CD5;">CRC&#x6821;&#x9A8C;&#x7B97;&#x6CD5;</h3>
-<pre><code class="lang-c">For the calculation of the CRC<span class="hljs-number">-16</span> the following polynomial is used:
-X^<span class="hljs-number">16</span> + X ^<span class="hljs-number">15</span> + X^<span class="hljs-number">2</span> + <span class="hljs-number">1</span> = (x + <span class="hljs-number">1</span>) * (X^<span class="hljs-number">15</span> + x + <span class="hljs-number">1</span>).
-For <span class="hljs-keyword">this</span> polynomial efficient calculation via a table is possible. Below the algorithm is given in C:
-<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> CRC(crc,byte) (((crc) &gt;&gt; 8 ) ^ tabel[((crc) ^ (unsigned int) (byte)) &amp; 0XFF])</span>
-<span class="hljs-keyword">static</span> <span class="hljs-keyword">const</span> uint16 tabel[<span class="hljs-number">256</span>] = {
-<span class="hljs-number">0X0000</span>, <span class="hljs-number">0XC0C1</span>, <span class="hljs-number">0XC181</span>, <span class="hljs-number">0X0140</span>, <span class="hljs-number">0XC301</span>, <span class="hljs-number">0X03C0</span>, <span class="hljs-number">0X0280</span>, <span class="hljs-number">0XC241</span>,
-<span class="hljs-number">0XC601</span>, <span class="hljs-number">0X06C0</span>, <span class="hljs-number">0X0780</span>, <span class="hljs-number">0XC741</span>, <span class="hljs-number">0X0500</span>, <span class="hljs-number">0XC5C1</span>, <span class="hljs-number">0XC481</span>, <span class="hljs-number">0X0440</span>,
-<span class="hljs-number">0XCC01</span>, <span class="hljs-number">0X0CC0</span>, <span class="hljs-number">0X0D80</span>, <span class="hljs-number">0XCD41</span>, <span class="hljs-number">0X0F00</span>, <span class="hljs-number">0XCFC1</span>, <span class="hljs-number">0XCE81</span>, <span class="hljs-number">0X0E40</span>,
-<span class="hljs-number">0X0A00</span>, <span class="hljs-number">0XCAC1</span>, <span class="hljs-number">0XCB81</span>, <span class="hljs-number">0X0B40</span>, <span class="hljs-number">0XC901</span>, <span class="hljs-number">0X09C0</span>, <span class="hljs-number">0X0880</span>, <span class="hljs-number">0XC841</span>,
-<span class="hljs-number">0XD801</span>, <span class="hljs-number">0X18C0</span>, <span class="hljs-number">0X1980</span>, <span class="hljs-number">0XD941</span>, <span class="hljs-number">0X1B00</span>, <span class="hljs-number">0XDBC1</span>, <span class="hljs-number">0XDA81</span>, <span class="hljs-number">0X1A40</span>,
-<span class="hljs-number">0X1E00</span>, <span class="hljs-number">0XDEC1</span>, <span class="hljs-number">0XDF81</span>, <span class="hljs-number">0X1F40</span>, <span class="hljs-number">0XDD01</span>, <span class="hljs-number">0X1DC0</span>, <span class="hljs-number">0X1C80</span>, <span class="hljs-number">0XDC41</span>,
-<span class="hljs-number">0X1400</span>, <span class="hljs-number">0XD4C1</span>, <span class="hljs-number">0XD581</span>, <span class="hljs-number">0X1540</span>, <span class="hljs-number">0XD701</span>, <span class="hljs-number">0X17C0</span>, <span class="hljs-number">0X1680</span>, <span class="hljs-number">0XD641</span>,
-<span class="hljs-number">0XD201</span>, <span class="hljs-number">0X12C0</span>, <span class="hljs-number">0X1380</span>, <span class="hljs-number">0XD341</span>, <span class="hljs-number">0X1100</span>, <span class="hljs-number">0XD1C1</span>, <span class="hljs-number">0XD081</span>, <span class="hljs-number">0X1040</span>,
-<span class="hljs-number">0XF001</span>, <span class="hljs-number">0X30C0</span>, <span class="hljs-number">0X3180</span>, <span class="hljs-number">0XF141</span>, <span class="hljs-number">0X3300</span>, <span class="hljs-number">0XF3C1</span>, <span class="hljs-number">0XF281</span>, <span class="hljs-number">0X3240</span>,
-<span class="hljs-number">0X3600</span>, <span class="hljs-number">0XF6C1</span>, <span class="hljs-number">0XF781</span>, <span class="hljs-number">0X3740</span>, <span class="hljs-number">0XF501</span>, <span class="hljs-number">0X35C0</span>, <span class="hljs-number">0X3480</span>, <span class="hljs-number">0XF441</span>,
-<span class="hljs-number">0X3C00</span>, <span class="hljs-number">0XFCC1</span>, <span class="hljs-number">0XFD81</span>, <span class="hljs-number">0X3D40</span>, <span class="hljs-number">0XFF01</span>, <span class="hljs-number">0X3FC0</span>, <span class="hljs-number">0X3E80</span>, <span class="hljs-number">0XFE41</span>,
-<span class="hljs-number">0XFA01</span>, <span class="hljs-number">0X3AC0</span>, <span class="hljs-number">0X3B80</span>, <span class="hljs-number">0XFB41</span>, <span class="hljs-number">0X3900</span>, <span class="hljs-number">0XF9C1</span>, <span class="hljs-number">0XF881</span>, <span class="hljs-number">0X3840</span>,
-<span class="hljs-number">0X2800</span>, <span class="hljs-number">0XE8C1</span>, <span class="hljs-number">0XE981</span>, <span class="hljs-number">0X2940</span>, <span class="hljs-number">0XEB01</span>, <span class="hljs-number">0X2BC0</span>, <span class="hljs-number">0X2A80</span>, <span class="hljs-number">0XEA41</span>,
-<span class="hljs-number">0XEE01</span>, <span class="hljs-number">0X2EC0</span>, <span class="hljs-number">0X2F80</span>, <span class="hljs-number">0XEF41</span>, <span class="hljs-number">0X2D00</span>, <span class="hljs-number">0XEDC1</span>, <span class="hljs-number">0XEC81</span>, <span class="hljs-number">0X2C40</span>,
-<span class="hljs-number">0XE401</span>, <span class="hljs-number">0X24C0</span>, <span class="hljs-number">0X2580</span>, <span class="hljs-number">0XE541</span>, <span class="hljs-number">0X2700</span>, <span class="hljs-number">0XE7C1</span>, <span class="hljs-number">0XE681</span>, <span class="hljs-number">0X2640</span>,
-<span class="hljs-number">0X2200</span>, <span class="hljs-number">0XE2C1</span>, <span class="hljs-number">0XE381</span>, <span class="hljs-number">0X2340</span>, <span class="hljs-number">0XE101</span>, <span class="hljs-number">0X21C0</span>, <span class="hljs-number">0X2080</span>, <span class="hljs-number">0XE041</span>,
-<span class="hljs-number">0XA001</span>, <span class="hljs-number">0X60C0</span>, <span class="hljs-number">0X6180</span>, <span class="hljs-number">0XA141</span>, <span class="hljs-number">0X6300</span>, <span class="hljs-number">0XA3C1</span>, <span class="hljs-number">0XA281</span>, <span class="hljs-number">0X6240</span>,
-<span class="hljs-number">0X6600</span>, <span class="hljs-number">0XA6C1</span>, <span class="hljs-number">0XA781</span>, <span class="hljs-number">0X6740</span>, <span class="hljs-number">0XA501</span>, <span class="hljs-number">0X65C0</span>, <span class="hljs-number">0X6480</span>, <span class="hljs-number">0XA441</span>,
-<span class="hljs-number">0X6C00</span>, <span class="hljs-number">0XACC1</span>, <span class="hljs-number">0XAD81</span>, <span class="hljs-number">0X6D40</span>, <span class="hljs-number">0XAF01</span>, <span class="hljs-number">0X6FC0</span>, <span class="hljs-number">0X6E80</span>, <span class="hljs-number">0XAE41</span>,
-<span class="hljs-number">0XAA01</span>, <span class="hljs-number">0X6AC0</span>, <span class="hljs-number">0X6B80</span>, <span class="hljs-number">0XAB41</span>, <span class="hljs-number">0X6900</span>, <span class="hljs-number">0XA9C1</span>, <span class="hljs-number">0XA881</span>, <span class="hljs-number">0X6840</span>,
-<span class="hljs-number">0X7800</span>, <span class="hljs-number">0XB8C1</span>, <span class="hljs-number">0XB981</span>, <span class="hljs-number">0X7940</span>, <span class="hljs-number">0XBB01</span>, <span class="hljs-number">0X7BC0</span>, <span class="hljs-number">0X7A80</span>, <span class="hljs-number">0XBA41</span>,
-<span class="hljs-number">0XBE01</span>, <span class="hljs-number">0X7EC0</span>, <span class="hljs-number">0X7F80</span>, <span class="hljs-number">0XBF41</span>, <span class="hljs-number">0X7D00</span>, <span class="hljs-number">0XBDC1</span>, <span class="hljs-number">0XBC81</span>, <span class="hljs-number">0X7C40</span>,
-<span class="hljs-number">0XB401</span>, <span class="hljs-number">0X74C0</span>, <span class="hljs-number">0X7580</span>, <span class="hljs-number">0XB541</span>, <span class="hljs-number">0X7700</span>, <span class="hljs-number">0XB7C1</span>, <span class="hljs-number">0XB681</span>, <span class="hljs-number">0X7640</span>,
-<span class="hljs-number">0X7200</span>, <span class="hljs-number">0XB2C1</span>, <span class="hljs-number">0XB381</span>, <span class="hljs-number">0X7340</span>, <span class="hljs-number">0XB101</span>, <span class="hljs-number">0X71C0</span>, <span class="hljs-number">0X7080</span>, <span class="hljs-number">0XB041</span>,
-<span class="hljs-number">0X5000</span>, <span class="hljs-number">0X90C1</span>, <span class="hljs-number">0X9181</span>, <span class="hljs-number">0X5140</span>, <span class="hljs-number">0X9301</span>, <span class="hljs-number">0X53C0</span>, <span class="hljs-number">0X5280</span>, <span class="hljs-number">0X9241</span>,
-<span class="hljs-number">0X9601</span>, <span class="hljs-number">0X56C0</span>, <span class="hljs-number">0X5780</span>, <span class="hljs-number">0X9741</span>, <span class="hljs-number">0X5500</span>, <span class="hljs-number">0X95C1</span>, <span class="hljs-number">0X9481</span>, <span class="hljs-number">0X5440</span>,
-<span class="hljs-number">0X9C01</span>, <span class="hljs-number">0X5CC0</span>, <span class="hljs-number">0X5D80</span>, <span class="hljs-number">0X9D41</span>, <span class="hljs-number">0X5F00</span>, <span class="hljs-number">0X9FC1</span>, <span class="hljs-number">0X9E81</span>, <span class="hljs-number">0X5E40</span>,
-<span class="hljs-number">0X5A00</span>, <span class="hljs-number">0X9AC1</span>, <span class="hljs-number">0X9B81</span>, <span class="hljs-number">0X5B40</span>, <span class="hljs-number">0X9901</span>, <span class="hljs-number">0X59C0</span>, <span class="hljs-number">0X5880</span>, <span class="hljs-number">0X9841</span>,
-<span class="hljs-number">0X8801</span>, <span class="hljs-number">0X48C0</span>, <span class="hljs-number">0X4980</span>, <span class="hljs-number">0X8941</span>, <span class="hljs-number">0X4B00</span>, <span class="hljs-number">0X8BC1</span>, <span class="hljs-number">0X8A81</span>, <span class="hljs-number">0X4A40</span>,
-<span class="hljs-number">0X4E00</span>, <span class="hljs-number">0X8EC1</span>, <span class="hljs-number">0X8F81</span>, <span class="hljs-number">0X4F40</span>, <span class="hljs-number">0X8D01</span>, <span class="hljs-number">0X4DC0</span>, <span class="hljs-number">0X4C80</span>, <span class="hljs-number">0X8C41</span>,
-<span class="hljs-number">0X4400</span>, <span class="hljs-number">0X84C1</span>, <span class="hljs-number">0X8581</span>, <span class="hljs-number">0X4540</span>, <span class="hljs-number">0X8701</span>, <span class="hljs-number">0X47C0</span>, <span class="hljs-number">0X4680</span>, <span class="hljs-number">0X8641</span>,
-<span class="hljs-number">0X8201</span>, <span class="hljs-number">0X42C0</span>, <span class="hljs-number">0X4380</span>, <span class="hljs-number">0X8341</span>, <span class="hljs-number">0X4100</span>, <span class="hljs-number">0X81C1</span>, <span class="hljs-number">0X8081</span>, <span class="hljs-number">0X4040</span>
-};
-<span class="hljs-function"><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">short</span> <span class="hljs-title">CalcCRC</span><span class="hljs-params">(uint8 *data, uint32 size)</span>
-</span>{
-uint32 i;
-<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">short</span> crc = <span class="hljs-number">0</span>;
-<span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; size; i++) {
-crc = CRC(crc, data[i]);
-}
-<span class="hljs-keyword">return</span> crc;
-}
-</code></pre>
+                                <h1 id="6&#x9519;&#x8BEF;&#x72B6;&#x6001;cmderror">6.&#x9519;&#x8BEF;&#x72B6;&#x6001;CmdError</h1>
+<table>
+<thead>
+<tr>
+<th>&#x7F16;&#x53F7;</th>
+<th>&#x540D;&#x79F0;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>ERR_NO</td>
+<td>No Error</td>
+</tr>
+<tr>
+<td>1</td>
+<td>ERR_OUTOFGROUP</td>
+<td>Command Group Error</td>
+</tr>
+<tr>
+<td>2</td>
+<td>ERR_NOCMD</td>
+<td>Command Not Found</td>
+</tr>
+<tr>
+<td>3</td>
+<td>ERR_BUSY</td>
+<td>The Controller is busy now</td>
+</tr>
+<tr>
+<td>4</td>
+<td>ERR_MEMORYVOLUME</td>
+<td>Out of the Memory Volume</td>
+</tr>
+<tr>
+<td>5</td>
+<td>ERR_CHECKSUM</td>
+<td>CRC16 Checksum Error</td>
+</tr>
+<tr>
+<td>6</td>
+<td>ERR_FILENOTEXIST</td>
+<td>File Not Exist</td>
+</tr>
+<tr>
+<td>7</td>
+<td>ERR_FLASH</td>
+<td>Flash Access Error</td>
+</tr>
+<tr>
+<td>8</td>
+<td>ERR_FILE_DOWNLOAD</td>
+<td>File Download Error</td>
+</tr>
+<tr>
+<td>9</td>
+<td>ERR_FILE_NAME</td>
+<td>Filename Error</td>
+</tr>
+<tr>
+<td>10</td>
+<td>ERR_FILE_TYPE</td>
+<td>File type Error</td>
+</tr>
+<tr>
+<td>11</td>
+<td>ERR_FILE_CRC16</td>
+<td>File CRC16 Error</td>
+</tr>
+<tr>
+<td>12</td>
+<td>ERR_FONT_NOT_EXIST</td>
+<td>Font Library Not Exist</td>
+</tr>
+<tr>
+<td>13</td>
+<td>ERR_FIRMWARE_TYPE</td>
+<td>Firmware Type Error (Check the controller type)</td>
+</tr>
+<tr>
+<td>14</td>
+<td>ERR_DATE_TIME_FORMAT</td>
+<td>Date Time format error</td>
+</tr>
+<tr>
+<td>15</td>
+<td>ERR_FILE_EXIST</td>
+<td>File Exist for File overwrite</td>
+</tr>
+<tr>
+<td>16</td>
+<td>ERR_FILE_BLOCK_NUM</td>
+<td>File block number error</td>
+</tr>
+</tbody>
+</table>
 
                                 
                                 </section>
@@ -1330,12 +1377,12 @@ crc = CRC(crc, data[i]);
 
             
                 
-                <a href="../Graphic/Graphic.html" class="navigation navigation-prev " aria-label="Previous page: 11.3时间内容编辑">
+                <a href="../Data/Data.html" class="navigation navigation-prev " aria-label="Previous page: 5.2单包发送和多包发送">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="README.md" class="navigation navigation-next " aria-label="Next page: CRC校验算法">
+                <a href="../ACK NACK/ACK NACK.html" class="navigation navigation-next " aria-label="Next page: 7.ACK和NACK">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1346,7 +1393,7 @@ crc = CRC(crc, data[i]);
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"附录","level":"2.13","depth":1,"next":{"title":"CRC校验算法","level":"2.13.1","depth":2,"path":"Appendix/README.md","ref":"Appendix/README.md","articles":[]},"previous":{"title":"11.3时间内容编辑","level":"2.12.3","depth":2,"path":"Graphic/Graphic.md","ref":"Graphic/Graphic.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Appendix/Appendix.md","mtime":"2020-03-23T10:18:23.417Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-03T08:44:14.855Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"6.错误状态CmdError","level":"2.7","depth":1,"next":{"title":"7.ACK和NACK","level":"2.8","depth":1,"path":"ACK NACK/ACK NACK.md","ref":"ACK NACK/ACK NACK.md","articles":[{"title":"7.1ACK","level":"2.8.1","depth":2,"path":"ACK NACK/ACK NACK.md","ref":"ACK NACK/ACK NACK.md","articles":[]},{"title":"7.2NACK","level":"2.8.2","depth":2,"path":"ACK NACK/ACK NACK.md","ref":"ACK NACK/ACK NACK.md","articles":[]}]},"previous":{"title":"5.2单包发送和多包发送","level":"2.6.4","depth":2,"path":"Data/Data.md","ref":"Data/Data.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Error/Error.md","mtime":"2020-03-23T10:18:23.422Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-03T09:08:09.355Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
